@@ -14,18 +14,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/main.takePicture"
-            android:id="@+id/takePicture"
+            android:id="@+id/takePictureButton"
             android:layout_row="0"
             android:layout_column="0"
-            android:width="150dp" />
+            android:width="150dp"
+            android:onClick="takePictureHandler"/>
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/main.history"
-            android:id="@+id/history"
+            android:id="@+id/historyButton"
             android:layout_row="1"
             android:layout_column="0"
-            android:width="150dp" />
+            android:width="150dp"
+            android:onClick="historyHandler"/>
     </GridLayout>
 </FrameLayout>
