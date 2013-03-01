@@ -16,11 +16,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class MyActivity extends Activity
+public class MainActivity extends Activity
 {
+    private static final String TAG = "MainActivity";
     private static final int ACTION_TAKE_PHOTO = 100;
-    private static final String JPEG_FILE_PREFIX = "IMG_";
     private static final String JPEG_FILE_SUFFIX = ".jpg";
+    public static final String EXTRA_MESSAGE = "be.alfredo.colruyt.MESSAGE";
 
     private String mCurrentPhotoPath;
 
@@ -96,7 +97,9 @@ public class MyActivity extends Activity
         {
             if (resultCode == RESULT_OK)
             {
-                // Image captured and saved to fileUri specified in the Intent
+                Intent ocrIntent = new Intent(this, OCRActivity.class);
+                ocrIntent.putExtra(EXTRA_MESSAGE, mCurrentPhotoPath);
+                startActivity(ocrIntent);
             }
             else if (resultCode == RESULT_CANCELED)
             {
