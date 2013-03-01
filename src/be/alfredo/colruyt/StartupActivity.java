@@ -19,8 +19,8 @@ import java.io.*;
  */
 public class StartupActivity extends Activity
 {
-    private final static String TESSDATA_PATH = "/Colruyt/tessdata/";
-    private final static String TAG = "StartupActivity";
+    public static final String TESSDATA_PATH = "/Colruyt/tessdata/";
+    private static final String TAG = "StartupActivity";
     private String extStorageDirectory;
 
     public void onCreate(Bundle savedInstanceState)
