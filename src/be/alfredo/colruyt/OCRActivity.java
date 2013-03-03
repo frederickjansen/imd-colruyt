@@ -21,7 +21,7 @@ import java.io.IOException;
 public class OCRActivity extends Activity
 {
     private static final String TAG = "OCRActivity";
-    private static final String lang = "eng";
+    private static final String lang = "nld";
 
     private String mCurrentPhotoPath;
     private Bitmap image;
@@ -114,13 +114,14 @@ public class OCRActivity extends Activity
     {
         TessBaseAPI baseApi = new TessBaseAPI();
         baseApi.setDebug(true);
-        baseApi.init(Environment.getExternalStorageDirectory() + StartupActivity.TESSDATA_PATH, lang);
+        baseApi.init(Environment.getExternalStorageDirectory() + StartupActivity.ALBUM_NAME, lang);
         baseApi.setImage(image);
 
         recognizedText = baseApi.getUTF8Text();
 
         baseApi.end();
 
-        Log.d(TAG, recognizedText);
+        Log.e(TAG, recognizedText);
+        //Log.v(TAG, "OCR Started!");
     }
 }

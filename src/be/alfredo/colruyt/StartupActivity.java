@@ -19,13 +19,17 @@ import java.io.*;
  */
 public class StartupActivity extends Activity
 {
-    public static final String TESSDATA_PATH = "/Colruyt/tessdata/";
+    public static final String ALBUM_NAME = "/Colruyt";
+    public static final String TESSDATA_PATH = "/Colruyt/tessdata";
     private static final String TAG = "StartupActivity";
-    private String extStorageDirectory;
+    private File extStorageDirectory = null;
 
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+
+
+
         firstRun();
     }
 
@@ -56,17 +60,27 @@ public class StartupActivity extends Activity
      */
     private void setDirectory()
     {
-        if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
+        if (Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
         {
-            extStorageDirectory = Environment.getExternalStorageDirectory().toString();
+            extStorageDirectory = Environment.getExternalStorageDirectory();
 
             File tessdata = new File(extStorageDirectory + TESSDATA_PATH); // Create a file object for the parent directory
-            tessdata.mkdirs();// Have the object build the directory
-            // structure, if needed.
-            copyAssets(); // Then run the method to copy the file.
 
+            if (tessdata != null)
+            {
+                if (!tessdata.mkdirs()) // Folder can't be created
+                {
+                    if (!tessdata.exists()) // Folder doesn't exist
+                    {
+                        Log.v(TAG, "Tessdata folder can't be created");
+                        finish();
+                    }
+                }
+            }
+
+            copyAssets(); // Then run the method to copy the file.
         }
-        else if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED_READ_ONLY))
+        else
         {
             Context context = getApplicationContext();
             //TODO Move to strings.xml

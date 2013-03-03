@@ -7,7 +7,9 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 
 import java.io.File;
@@ -21,6 +23,7 @@ public class MainActivity extends Activity
     private static final String TAG = "MainActivity";
     private static final int ACTION_TAKE_PHOTO = 100;
     private static final String JPEG_FILE_SUFFIX = ".jpg";
+    private static final String JPEG_FILE_PREFIX = "IMG_";
     public static final String EXTRA_MESSAGE = "be.alfredo.colruyt.MESSAGE";
 
     private String mCurrentPhotoPath;
@@ -77,11 +80,46 @@ public class MainActivity extends Activity
      */
     private File setUpPhotoFile() throws IOException
     {
-        File imageF = File.createTempFile("image", JPEG_FILE_SUFFIX, getCacheDir());;
+        File imageF = File.createTempFile(JPEG_FILE_PREFIX, JPEG_FILE_SUFFIX, getAlbumDir());;
         mCurrentPhotoPath = imageF.getAbsolutePath();
 
         return imageF;
     }
+
+    /**
+     * Get the directory where the image will be temporarily stored in.
+     *
+     * @return Location of directory to store picture in
+     */
+    private File getAlbumDir()
+    {
+        File albumDir = null;
+        if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
+        {
+             albumDir = new File(Environment.getExternalStorageDirectory() + StartupActivity.ALBUM_NAME);
+
+            if (albumDir != null)
+            {
+                // This album should already been created by StartupActivity, but we'll check just in case
+                if (!albumDir.mkdirs())
+                {
+                    if (!albumDir.exists())
+                    {
+                        Log.v(TAG, "Can't create external dir " + StartupActivity.ALBUM_NAME);
+                        finish();
+                    }
+                }
+            }
+        }
+        else
+        {
+            Log.v(TAG, "External storage is not mounted");
+            finish();
+        }
+
+        return albumDir;
+    }
+
 
     /**
      * Intercepting callback from the camera intent
