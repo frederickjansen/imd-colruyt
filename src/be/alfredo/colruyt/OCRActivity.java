@@ -34,7 +34,7 @@ public class OCRActivity extends Activity
         setContentView(R.layout.ocr_wait);
 
         Intent intent = getIntent();
-        mCurrentPhotoPath = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+        mCurrentPhotoPath = intent.getStringExtra(CameraActivity.EXTRA_MESSAGE);
 
         rotateImage();
         ocrImage();
