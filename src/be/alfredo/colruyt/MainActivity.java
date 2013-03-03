@@ -42,7 +42,7 @@ public class MainActivity extends Activity
      *
      * @param view
      */
-    protected void takePictureHandler(View view)
+    public void takePictureHandler(View view)
     {
         if (isIntentAvailable(this, MediaStore.ACTION_VIDEO_CAPTURE))
         {
