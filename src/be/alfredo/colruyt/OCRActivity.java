@@ -61,6 +61,8 @@ public class OCRActivity extends Activity
             ExifInterface exif = new ExifInterface(mCurrentPhotoPath);
             int exifRotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
 
+            // Scale the image
+            //BitmapFactory.Options options =
             // Load the image taken earlier
             image = BitmapFactory.decodeFile(mCurrentPhotoPath, null);
 

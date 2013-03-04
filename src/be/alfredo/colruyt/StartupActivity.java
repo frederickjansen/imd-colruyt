@@ -27,9 +27,6 @@ public class StartupActivity extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-
-
-
         firstRun();
     }
 
