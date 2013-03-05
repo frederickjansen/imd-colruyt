@@ -24,8 +24,9 @@
             android:label="@string/app_name" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="be.alfredo.colruyt.MainActivity" />
+                android:value="be.alfredo.colruyt.CameraActivity" />
         </activity>
         <activity android:name=".CameraActivity"/>
+
     </application>
 </manifest>

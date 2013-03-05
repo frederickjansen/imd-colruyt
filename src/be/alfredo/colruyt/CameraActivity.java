@@ -100,7 +100,6 @@ public class CameraActivity extends Activity
         return albumDir;
     }
 
-
     /**
      * Intercepting callback from the camera intent
      *

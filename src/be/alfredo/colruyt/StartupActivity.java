@@ -34,6 +34,7 @@ public class StartupActivity extends Activity
     {
         SharedPreferences settings = this.getSharedPreferences("Colruyt", 0);
         boolean firstrun = settings.getBoolean("firstrun", true);
+        // TODO: Remove this for deploy
         if (firstrun)
         { // Checks to see if we've ran the application before
             SharedPreferences.Editor e = settings.edit();
@@ -60,7 +61,6 @@ public class StartupActivity extends Activity
         if (Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
         {
             extStorageDirectory = Environment.getExternalStorageDirectory();
-
             File tessdata = new File(extStorageDirectory + TESSDATA_PATH); // Create a file object for the parent directory
 
             if (tessdata != null)
@@ -74,7 +74,6 @@ public class StartupActivity extends Activity
                     }
                 }
             }
-
             copyAssets(); // Then run the method to copy the file.
         }
         else
@@ -107,6 +106,8 @@ public class StartupActivity extends Activity
 
         for (int i = 0; i < files.length; i++)
         {
+            Log.e(TAG, "Copying file " + files[i].toString());
+
             InputStream in = null;
             OutputStream out = null;
             try

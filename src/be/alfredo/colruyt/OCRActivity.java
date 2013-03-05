@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -47,8 +48,7 @@ public class OCRActivity extends Activity
     public void onDestroy()
     {
         super.onDestroy();
-
-        deleteFile(mCurrentPhotoPath);
+        //deleteFile(mCurrentPhotoPath);
     }
 
     /**
@@ -61,10 +61,11 @@ public class OCRActivity extends Activity
             ExifInterface exif = new ExifInterface(mCurrentPhotoPath);
             int exifRotation = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
 
-            // Scale the image
-            //BitmapFactory.Options options =
+            // Scale the image down
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 4;
             // Load the image taken earlier
-            image = BitmapFactory.decodeFile(mCurrentPhotoPath, null);
+            image = BitmapFactory.decodeFile(mCurrentPhotoPath, options);
 
             int rotate = 0;
 
@@ -114,16 +115,57 @@ public class OCRActivity extends Activity
 
     private void ocrImage()
     {
-        TessBaseAPI baseApi = new TessBaseAPI();
-        baseApi.setDebug(true);
-        baseApi.init(Environment.getExternalStorageDirectory() + StartupActivity.ALBUM_NAME, lang);
-        baseApi.setImage(image);
+        OCRTask ocrTask = new OCRTask();
+        ocrTask.execute(image);
+        /*TessBaseAPI baseAPI = new TessBaseAPI();
+        baseAPI.setDebug(true);
+        baseAPI.init(
+                Environment.getExternalStorageDirectory() + StartupActivity.ALBUM_NAME,
+                lang);
+        baseAPI.setImage(image);
 
-        recognizedText = baseApi.getUTF8Text();
 
-        baseApi.end();
-
+        recognizedText = baseAPI.getUTF8Text();
         Log.e(TAG, recognizedText);
-        //Log.v(TAG, "OCR Started!");
+        baseAPI.end();*/
+    }
+
+    private class OCRTask extends AsyncTask<Bitmap, Void, String>
+    {
+        private TessBaseAPI baseAPI;
+
+        /**
+         * Start Tesseract with earlier taken image. Cube combined is the slowest, but provides the best results.
+         *
+         * @param images
+         * @return Decoded text
+         */
+        @Override
+        protected String doInBackground(Bitmap... images)
+        {
+            baseAPI = new TessBaseAPI();
+            baseAPI.setDebug(true);
+            baseAPI.init(
+                    Environment.getExternalStorageDirectory() + StartupActivity.ALBUM_NAME,
+                    lang);
+            baseAPI.setImage(image);
+
+            return baseAPI.getUTF8Text();
+        }
+
+        /**
+         * When the task is done, set the recognized text and destroy Tesseract.
+         *
+         * @param result
+         */
+        @Override
+        protected void onPostExecute(String result)
+        {
+            recognizedText = result;
+            Log.e(TAG, recognizedText);
+            baseAPI.end();
+            baseAPI = null;
+        }
+
     }
 }
