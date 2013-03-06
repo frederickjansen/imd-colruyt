@@ -14,15 +14,14 @@ import java.io.*;
 
 /**
  * Copy assets to external storage on first run
- *
- * @see <a href="http://stackoverflow.com/questions/11128260/android-how-to-load-a-file-from-assets-to-sd-at-first-run">http://stackoverflow.com/questions/11128260/android-how-to-load-a-file-from-assets-to-sd-at-first-run</a>
  */
 public class StartupActivity extends Activity
 {
-    public static final String ALBUM_NAME = "/Colruyt";
+    public static final String TARGET_BASE_PATH = "/Colruyt";
     public static final String TESSDATA_PATH = "/Colruyt/tessdata";
     private static final String TAG = "StartupActivity";
     private File extStorageDirectory = null;
+    private AssetManager assetManager = null;
 
     public void onCreate(Bundle savedInstanceState)
     {
@@ -35,13 +34,14 @@ public class StartupActivity extends Activity
         SharedPreferences settings = this.getSharedPreferences("Colruyt", 0);
         boolean firstrun = settings.getBoolean("firstrun", true);
         // TODO: Remove this for deploy
-        if (firstrun)
+        if (true)
         { // Checks to see if we've ran the application before
             SharedPreferences.Editor e = settings.edit();
             e.putBoolean("firstrun", false);
             e.commit();
             // If not, run these methods:
-            setDirectory();
+            extStorageDirectory = Environment.getExternalStorageDirectory();
+            createDirectories("");
             Intent home = new Intent(StartupActivity.this, MainActivity.class);
             startActivity(home);
 
@@ -56,31 +56,63 @@ public class StartupActivity extends Activity
     /**
      * Check to see if the sdCard is mounted and create a directory w/in it
      */
-    private void setDirectory()
+    private void createDirectories(String path)
     {
         if (Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
         {
-            extStorageDirectory = Environment.getExternalStorageDirectory();
-            File tessdata = new File(extStorageDirectory + TESSDATA_PATH); // Create a file object for the parent directory
-
-            if (tessdata != null)
+            assetManager = this.getAssets();
+            String assets[] = null;
+            try
             {
-                if (!tessdata.mkdirs()) // Folder can't be created
+                Log.e(TAG, "createDirectories() " + path);
+                assets = assetManager.list(path);
+
+                // If length is 0, it's a file or an empty directory
+                if (assets.length == 0)
                 {
-                    if (!tessdata.exists()) // Folder doesn't exist
+                    copyFile(path);
+                }
+                else
+                {
+                    String fullPath = extStorageDirectory + TARGET_BASE_PATH + File.separator + path;
+                    File dir = new File(fullPath);
+
+                    if (!dir.exists() && !path.startsWith("images") && !path.startsWith("sounds") && !path.startsWith("webkit"))
                     {
-                        Log.v(TAG, "Tessdata folder can't be created");
-                        finish();
+                        if (!dir.mkdirs())
+                        {
+                            Log.e(TAG, "Could not create dir " + fullPath);
+                        }
+                    }
+
+                    for (int i = 0; i < assets.length; ++i)
+                    {
+                        String p;
+                        if (path.equals(""))
+                        {
+                            p = "";
+                        }
+                        else
+                        {
+                            p = path + "/";
+                        }
+
+                        if (!path.startsWith("images") && !path.startsWith("sounds") && !path.startsWith("webkit"))
+                        {
+                            createDirectories(p + assets[i]);
+                        }
                     }
                 }
             }
-            copyAssets(); // Then run the method to copy the file.
+            catch (IOException ex)
+            {
+                Log.e(TAG, "I/O Exception ", ex);
+            }
         }
         else
         {
             Context context = getApplicationContext();
-            //TODO Move to strings.xml
-            String message = "SD card mounted read only";
+            String message = getString(R.string.sd_read_only);
             int duration = Toast.LENGTH_SHORT;
 
             Toast.makeText(context, message, duration);
@@ -91,50 +123,33 @@ public class StartupActivity extends Activity
     /**
      * Copy the file from the assets folder to the sdCard
      */
-    private void copyAssets()
+    private void copyFile(String path)
     {
-        AssetManager assetManager = getAssets();
-        String[] files = null;
+        Log.e(TAG, "Copying file " + path);
+
+        InputStream in = null;
+        OutputStream out = null;
         try
         {
-            files = assetManager.list("");
+            in = assetManager.open(path);
+            out = new FileOutputStream(extStorageDirectory + TARGET_BASE_PATH + File.separator + path);
+
+            byte[] buffer = new byte[1024];
+            int read;
+            while ((read = in.read(buffer)) != -1)
+            {
+                out.write(buffer, 0, read);
+            }
+
+            in.close();
+            in = null;
+            out.flush();
+            out.close();
+            out = null;
         }
-        catch (IOException e)
+        catch (Exception e)
         {
             Log.e(TAG, e.getMessage());
-        }
-
-        for (int i = 0; i < files.length; i++)
-        {
-            Log.e(TAG, "Copying file " + files[i].toString());
-
-            InputStream in = null;
-            OutputStream out = null;
-            try
-            {
-                in = assetManager.open(files[i]);
-                out = new FileOutputStream(extStorageDirectory + TESSDATA_PATH + files[i]);
-                copyFile(in, out);
-                in.close();
-                in = null;
-                out.flush();
-                out.close();
-                out = null;
-            }
-            catch (Exception e)
-            {
-                Log.e(TAG, e.getMessage());
-            }
-        }
-    }
-
-    private void copyFile(InputStream in, OutputStream out) throws IOException
-    {
-        byte[] buffer = new byte[1024];
-        int read;
-        while ((read = in.read(buffer)) != -1)
-        {
-            out.write(buffer, 0, read);
         }
     }
 }

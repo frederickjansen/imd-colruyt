@@ -22,7 +22,7 @@ import java.io.IOException;
 public class OCRActivity extends Activity
 {
     private static final String TAG = "OCRActivity";
-    private static final String lang = "nld";
+    private static final String lang = "eng";
 
     private String mCurrentPhotoPath;
     private Bitmap image;
@@ -146,7 +146,7 @@ public class OCRActivity extends Activity
             baseAPI = new TessBaseAPI();
             baseAPI.setDebug(true);
             baseAPI.init(
-                    Environment.getExternalStorageDirectory() + StartupActivity.ALBUM_NAME,
+                    Environment.getExternalStorageDirectory() + StartupActivity.TARGET_BASE_PATH,
                     lang);
             baseAPI.setImage(image);
 

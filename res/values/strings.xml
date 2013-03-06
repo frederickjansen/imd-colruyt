@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">colruyt</string>
+    <string name="sd_read_only">SD is mounted read only</string>
     <string name="main.takePicture">Foto nemen</string>
     <string name="main.history">Geschiedenis</string>
 </resources>

@@ -26,7 +26,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="be.alfredo.colruyt.CameraActivity" />
         </activity>
-        <activity android:name=".CameraActivity"/>
+        <activity android:name="be.alfredo.colruyt.CameraActivity"/>
 
     </application>
 </manifest>

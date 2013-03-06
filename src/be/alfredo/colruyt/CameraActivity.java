@@ -76,7 +76,7 @@ public class CameraActivity extends Activity
         File albumDir = null;
         if (Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED))
         {
-            albumDir = new File(Environment.getExternalStorageDirectory() + StartupActivity.ALBUM_NAME);
+            albumDir = new File(Environment.getExternalStorageDirectory() + StartupActivity.TARGET_BASE_PATH);
 
             if (albumDir != null)
             {
@@ -85,7 +85,7 @@ public class CameraActivity extends Activity
                 {
                     if (!albumDir.exists())
                     {
-                        Log.v(TAG, "Can't create external dir " + StartupActivity.ALBUM_NAME);
+                        Log.v(TAG, "Can't create external dir " + StartupActivity.TARGET_BASE_PATH);
                         finish();
                     }
                 }
