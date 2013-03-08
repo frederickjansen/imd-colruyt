@@ -29,32 +29,46 @@ public class StartupActivity extends Activity
         firstRun();
     }
 
+    /**
+     * When first running the application, copy the needed files from the assets folder
+     * to the SD card. On the next run, skip this step and boot the application.
+     */
     private void firstRun()
     {
         SharedPreferences settings = this.getSharedPreferences("Colruyt", 0);
         boolean firstrun = settings.getBoolean("firstrun", true);
+
         // TODO: Remove this for deploy
-        if (true)
-        { // Checks to see if we've ran the application before
+        if (firstrun) // Checks to see if we've ran the application before
+        {
+            // Add flag to app settings
             SharedPreferences.Editor e = settings.edit();
             e.putBoolean("firstrun", false);
             e.commit();
-            // If not, run these methods:
+
             extStorageDirectory = Environment.getExternalStorageDirectory();
             createDirectories("");
+
             Intent home = new Intent(StartupActivity.this, MainActivity.class);
             startActivity(home);
 
         }
         else
-        { // Otherwise start the application here:
+        {
+            // Otherwise simply start the app
             Intent home = new Intent(StartupActivity.this, MainActivity.class);
             startActivity(home);
         }
     }
 
     /**
-     * Check to see if the sdCard is mounted and create a directory w/in it
+     * Copy all files and folders from the assets folder to the SD card. This method loops through
+     * all of the files/folders in assets, recreates the directories and finally copies over the
+     * files. To detect whether we're dealing with a file or a folder, the length of the path in
+     * assets is checked. This means that empty folders should be avoided, otherwise they'll be
+     * confused with files.
+     *
+     * @param path The subdirectory of the assets folder in which to look.
      */
     private void createDirectories(String path)
     {
@@ -64,7 +78,6 @@ public class StartupActivity extends Activity
             String assets[] = null;
             try
             {
-                Log.e(TAG, "createDirectories() " + path);
                 assets = assetManager.list(path);
 
                 // If length is 0, it's a file or an empty directory
@@ -122,11 +135,11 @@ public class StartupActivity extends Activity
 
     /**
      * Copy the file from the assets folder to the sdCard
+     *
+     * @param path The location of the file to copy.
      */
     private void copyFile(String path)
     {
-        Log.e(TAG, "Copying file " + path);
-
         InputStream in = null;
         OutputStream out = null;
         try

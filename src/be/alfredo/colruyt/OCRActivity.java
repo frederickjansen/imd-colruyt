@@ -43,12 +43,13 @@ public class OCRActivity extends Activity
 
     /**
      * Delete the photo taken by the user
+     * TODO: Delete the image from the gallery as well
      */
     @Override
     public void onDestroy()
     {
         super.onDestroy();
-        //deleteFile(mCurrentPhotoPath);
+        deleteFile(mCurrentPhotoPath);
     }
 
     /**
@@ -113,23 +114,18 @@ public class OCRActivity extends Activity
         }
     }
 
+    /**
+     * Start async task to decode the image.
+     */
     private void ocrImage()
     {
         OCRTask ocrTask = new OCRTask();
         ocrTask.execute(image);
-        /*TessBaseAPI baseAPI = new TessBaseAPI();
-        baseAPI.setDebug(true);
-        baseAPI.init(
-                Environment.getExternalStorageDirectory() + StartupActivity.ALBUM_NAME,
-                lang);
-        baseAPI.setImage(image);
-
-
-        recognizedText = baseAPI.getUTF8Text();
-        Log.e(TAG, recognizedText);
-        baseAPI.end();*/
     }
 
+    /**
+     * Async task which starts Tesseract and decodes the image.
+     */
     private class OCRTask extends AsyncTask<Bitmap, Void, String>
     {
         private TessBaseAPI baseAPI;
