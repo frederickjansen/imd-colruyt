@@ -5,13 +5,13 @@ package be.alfredo.colruyt;
  */
 public class ComparisonResults
 {
-    private String productName;
+    private String product;
     private Number difference;
     private Number price;
 
-    public Number getDifference()
+    public String getDifference()
     {
-        return difference;
+        return difference.toString();
     }
 
     public void setDifference(Number difference)
@@ -19,9 +19,9 @@ public class ComparisonResults
         this.difference = difference;
     }
 
-    public Number getPrice()
+    public String getPrice()
     {
-        return price;
+        return price.toString();
     }
 
     public void setPrice(Number price)
@@ -29,13 +29,13 @@ public class ComparisonResults
         this.price = price;
     }
 
-    public void setProductName(String productName)
+    public void setProduct(String product)
     {
-        this.productName = productName;
+        this.product = product;
     }
 
-    public String getProductName()
+    public String getProduct()
     {
-        return productName;
+        return product;
     }
 }
