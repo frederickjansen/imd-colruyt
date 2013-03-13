@@ -6,20 +6,22 @@
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:paddingLeft="15dp"
-    android:paddingTop="15dp"
-    android:paddingRight="15dp">
+    android:paddingTop="10dp"
+    android:paddingRight="15dp"
+    android:paddingBottom="10dp">
 
     <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="5dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="New Text"
             android:id="@+id/product"
+            style="@android:style/TextAppearance.Medium"
             android:layout_alignParentLeft="true"
             />
 
@@ -28,8 +30,9 @@
             android:layout_height="wrap_content"
             android:text="New Text"
             android:id="@+id/difference"
+            style="@android:style/TextAppearance.Medium"
             android:layout_alignParentRight="true"
-            />
+            android:textStyle="bold"/>
     </RelativeLayout>
 
     <TextView

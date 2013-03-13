@@ -3,15 +3,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:paddingTop="15dp">
+              android:layout_height="match_parent">
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/comparison.toMain"
-        android:id="@+id/toMainButton"
-        android:layout_gravity="center"
-        android:width="200dp"
-        android:onClick="toMainHandler"/>
+        android:text="@string/comparison.title"
+        android:id="@+id/textView"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"/>
 </LinearLayout>

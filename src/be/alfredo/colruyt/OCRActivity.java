@@ -15,6 +15,7 @@ import android.os.Environment;
 import android.util.Log;
 import com.googlecode.tesseract.android.TessBaseAPI;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -57,7 +58,8 @@ public class OCRActivity extends Activity
     public void onDestroy()
     {
         super.onDestroy();
-        deleteFile(mCurrentPhotoPath);
+        File file = new File(mCurrentPhotoPath);
+        file.delete();
     }
 
     /**

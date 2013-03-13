@@ -19,7 +19,8 @@
             </intent-filter>
         </activity>
         <activity android:name="be.alfredo.colruyt.MainActivity"
-                  android:label="@string/app_name">
+                  android:label="@string/app_name"
+                  android:launchMode="singleTask">
         </activity>
         <activity
             android:name="be.alfredo.colruyt.OCRActivity"
@@ -29,6 +30,11 @@
                 android:value="be.alfredo.colruyt.CameraActivity" />
         </activity>
         <activity android:name="be.alfredo.colruyt.CameraActivity"/>
-
+        <activity
+            android:name="be.alfredo.colruyt.ComparisonListActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="be.alfredo.colruyt.MainActivity" />
+        </activity>
     </application>
 </manifest>

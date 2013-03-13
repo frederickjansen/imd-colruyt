@@ -64,8 +64,8 @@ public class ComparisonBaseAdapter extends BaseAdapter
         }
 
         holder.product.setText(comparisonArrayList.get(position).getProduct());
-        holder.price.setText(comparisonArrayList.get(position).getPrice());
-        holder.difference.setText(comparisonArrayList.get(position).getDifference());
+        holder.price.setText("€ " + comparisonArrayList.get(position).getPrice());
+        holder.difference.setText("-€ " + comparisonArrayList.get(position).getDifference());
 
         return convertView;
     }

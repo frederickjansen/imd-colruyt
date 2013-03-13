@@ -69,6 +69,7 @@ public class ServerUtilities
         catch (IOException e)
         {
             Log.e(TAG, "Can't open connection");
+            Log.e(TAG, e.getMessage());
         }
         finally
         {
