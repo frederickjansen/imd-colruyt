@@ -1,43 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:paddingLeft="15dp"
-    android:paddingTop="10dp"
-    android:paddingRight="15dp"
-    android:paddingBottom="10dp">
-
-    <RelativeLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/product"
-            style="@android:style/TextAppearance.Medium"
-            android:layout_alignParentLeft="true"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New Text"
-            android:id="@+id/difference"
-            style="@android:style/TextAppearance.Medium"
-            android:layout_alignParentRight="true"
-            android:textStyle="bold"/>
-    </RelativeLayout>
-
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/priceColruyt"/>
+        android:text="@string/comparison.title"
+        android:id="@+id/textView"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:layout_weight="0"/>
+
+    <ListView
+        android:id="@+id/crListView"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/comparison.toMain"
+        android:id="@+id/toMainButton"
+        android:layout_gravity="center"
+        android:width="200dp"
+        android:onClick="toMainHandler"
+        android:layout_weight="0"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+
 </LinearLayout>

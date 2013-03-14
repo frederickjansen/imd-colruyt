@@ -50,7 +50,7 @@ public class ComparisonBaseAdapter extends BaseAdapter
 
         if (convertView == null)
         {
-            convertView = inflater.inflate(R.layout.comparison_list, null);
+            convertView = inflater.inflate(R.layout.comparison_list_row_view, null);
             holder = new ViewHolder();
             holder.product = (TextView) convertView.findViewById(R.id.product);
             holder.price = (TextView) convertView.findViewById(R.id.priceColruyt);
