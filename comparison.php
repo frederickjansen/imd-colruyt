@@ -80,6 +80,7 @@ foreach ($data as $key => $value)
 }
 
 $final_data = array();
+$totalDifference = 0;
 
 foreach ($data_aldi as $key => $value)
 {
@@ -97,6 +98,7 @@ foreach ($data_aldi as $key => $value)
                                 "difference" => $difference,
                                 "price" => $data_colruyt[$value["id"]]
                         );
+                        $totalDifference += $difference;
                         break;
                 }
                 else
@@ -105,6 +107,12 @@ foreach ($data_aldi as $key => $value)
                 }
         }
 }
+
+$final_data[] = array(
+        "product" => "Totaal prijsverschil",
+        "difference" => $totalDifference,
+        "price" => 0
+);
 
 function weightedLevenshtein($str1, $str2)
 {
