@@ -3,7 +3,9 @@
 <FrameLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/bg"
+    android:focusableInTouchMode="false">
 
     <GridLayout
         android:layout_width="wrap_content"
@@ -32,4 +34,12 @@
             android:onClick="historyHandler"
             android:layout_marginTop="10dp"/>
     </GridLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal|top"
+        android:src="@drawable/colruyt_77567"
+        android:layout_marginTop="15dp"/>
 </FrameLayout>
