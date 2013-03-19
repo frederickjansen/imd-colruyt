@@ -26,6 +26,7 @@ public class StartupActivity extends Activity
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.ocr_wait);
         firstRun();
     }
 

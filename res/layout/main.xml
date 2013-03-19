@@ -1,39 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<FrameLayout
+<LinearLayout
+    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/bg"
-    android:focusableInTouchMode="false">
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <GridLayout
+    <Space
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/main.takePicture"
-            android:id="@+id/takePictureButton"
-            android:layout_row="0"
-            android:layout_column="0"
-            android:width="200dp"
-            android:onClick="takePictureHandler"
-            android:layout_marginTop="150dp"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/main.history"
-            android:id="@+id/historyButton"
-            android:layout_row="1"
-            android:layout_column="0"
-            android:width="200dp"
-            android:onClick="historyHandler"
-            android:layout_marginTop="10dp"/>
-    </GridLayout>
+        android:id="@+id/space2"
+        android:layout_weight="1"/>
 
     <ImageView
         android:layout_width="wrap_content"
@@ -41,5 +18,83 @@
         android:id="@+id/imageView"
         android:layout_gravity="center_horizontal|top"
         android:src="@drawable/colruyt_77567"
-        android:layout_marginTop="15dp"/>
-</FrameLayout>
+        android:contentDescription="@string/contentDescription"
+        android:layout_marginLeft="17dp"/>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/space"
+        android:layout_weight="1"/>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:id="@+id/relativeLayout1"
+        android:onClick="takePictureHandler"
+        android:background="@drawable/button">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main.takePicture"
+            android:id="@+id/textView2"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:layout_centerHorizontal="true"
+            style="@android:style/TextAppearance.Holo.Large"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:id="@+id/textView"
+            android:textStyle="bold"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            style="@android:style/TextAppearance.Holo.Large"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:id="@+id/space1"
+        android:background="@drawable/border"/>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeLayout2"
+        android:clickable="true"
+        android:onClick="historyHandler"
+        android:background="@drawable/button"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main.history"
+            android:id="@+id/textView4"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:layout_centerHorizontal="true"
+            style="@android:style/TextAppearance.Holo.Large"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/next"
+            android:id="@+id/textView5"
+            android:textStyle="bold"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            style="@android:style/TextAppearance.Holo.Large"/>
+    </RelativeLayout>
+
+</LinearLayout>
