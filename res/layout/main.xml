@@ -9,16 +9,16 @@
     <Space
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/space2"
+        android:id="@+id/space1"
         android:layout_weight="1"/>
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/imageView"
+        android:id="@+id/logo"
         android:layout_gravity="center_horizontal|top"
         android:src="@drawable/colruyt_77567"
-        android:contentDescription="@string/contentDescription"
+        android:contentDescription="@string/main.contentDescription"
         android:layout_marginLeft="17dp"/>
 
     <Space
@@ -31,7 +31,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
-        android:id="@+id/relativeLayout1"
+        android:id="@+id/takePictureButton"
         android:onClick="takePictureHandler"
         android:background="@drawable/button">
 
@@ -39,7 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/main.takePicture"
-            android:id="@+id/textView2"
+            android:id="@+id/takePictureText"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:layout_centerHorizontal="true"
@@ -49,8 +49,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/next"
-            android:id="@+id/textView"
+            android:text="@string/main.next"
+            android:id="@+id/takePictureArrow"
             android:textStyle="bold"
             android:layout_marginRight="10dp"
             android:layout_alignParentRight="true"
@@ -62,13 +62,13 @@
     <View
         android:layout_width="fill_parent"
         android:layout_height="2dp"
-        android:id="@+id/space1"
+        android:id="@+id/separator"
         android:background="@drawable/border"/>
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/relativeLayout2"
+        android:id="@+id/historyButton"
         android:clickable="true"
         android:onClick="historyHandler"
         android:background="@drawable/button"
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/main.history"
-            android:id="@+id/textView4"
+            android:id="@+id/historyText"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:layout_centerHorizontal="true"
@@ -88,8 +88,8 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/next"
-            android:id="@+id/textView5"
+            android:text="@string/main.next"
+            android:id="@+id/historyArrow"
             android:textStyle="bold"
             android:layout_marginRight="10dp"
             android:layout_alignParentRight="true"

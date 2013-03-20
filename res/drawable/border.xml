@@ -4,13 +4,13 @@
 
     <item>
         <shape android:shape="rectangle">
-            <solid android:color="#EEE"/>
+            <solid android:color="#FFF"/>
         </shape>
     </item>
 
     <item android:bottom="1dp">
         <shape android:shape="rectangle">
-            <solid android:color="#AAA"/>
+            <solid android:color="#BBB"/>
         </shape>
     </item>
 

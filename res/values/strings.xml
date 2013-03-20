@@ -4,8 +4,9 @@
     <string name="sd_read_only">SD is mounted read only</string>
     <string name="main.takePicture">Foto nemen</string>
     <string name="main.history">Geschiedenis</string>
+    <string name="main.next">&gt;</string>
+    <string name="main.contentDescription">Logo</string>
     <string name="comparison.toMain">Overzicht</string>
     <string name="comparison.title">Prijsvergelijking Colruyt</string>
-    <string name="next">&gt;</string>
-    <string name="contentDescription">Logo</string>
+    <string name="comparison.back">&lt;</string>
 </resources>

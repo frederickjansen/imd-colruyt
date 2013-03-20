@@ -9,12 +9,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/comparison.title"
-        android:id="@+id/textView"
-        android:layout_marginLeft="15dp"
+        android:id="@+id/comparisonTitle"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:textStyle="bold"
-        android:layout_weight="0"/>
+        android:layout_weight="0"
+        style="@android:style/TextAppearance.Holo.Medium"
+        android:layout_gravity="center_horizontal"/>
 
     <ListView
         android:id="@+id/crListView"
@@ -23,16 +24,36 @@
         android:layout_weight="1"
         />
 
-    <Button
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/comparison.toMain"
+        android:clickable="true"
         android:id="@+id/toMainButton"
-        android:layout_gravity="center"
-        android:width="200dp"
         android:onClick="toMainHandler"
-        android:layout_weight="0"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:background="@drawable/button">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/comparison.toMain"
+            android:id="@+id/toMainText"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:layout_centerHorizontal="true"
+            style="@android:style/TextAppearance.Holo.Large"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/comparison.back"
+            android:id="@+id/toMainText"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            style="@android:style/TextAppearance.Holo.Large"/>
+
+    </RelativeLayout>
 
 </LinearLayout>
