@@ -101,11 +101,12 @@ public class CameraActivity extends Activity
     }
 
     /**
-     * Intercepting callback from the camera intent
+     * Intercept callback from the camera intent. If the result is okay,
+     * start the OCR process.
      *
-     * @param requestCode
-     * @param resultCode
-     * @param data
+     * @param requestCode The unique code of the activity.
+     * @param resultCode The result of the activity.
+     * @param data An Intent which can return result data.
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data)

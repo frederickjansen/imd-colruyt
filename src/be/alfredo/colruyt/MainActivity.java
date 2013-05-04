@@ -22,9 +22,6 @@ public class MainActivity extends Activity
 {
     private static final String TAG = "MainActivity";
 
-    /**
-     * Called when the activity is first created.
-     */
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -48,6 +45,12 @@ public class MainActivity extends Activity
         }
     }
 
+    /**
+     * Called when the user clicks on the history button.
+     * TODO: Save ticket data and show all previous purchases here
+     *
+     * @param view
+     */
     public void historyHandler(View view)
     {
         // Show history
@@ -58,8 +61,8 @@ public class MainActivity extends Activity
      * method queries the package manager for installed packages that can
      * respond to an intent with the specified action. If no suitable package is
      * found, this method returns false.
-     * http://android-developers.blogspot.com/2009/01/can-i-use-this-intent.html
      *
+     * @see <a href="http://android-developers.blogspot.com/2009/01/can-i-use-this-intent.html">http://android-developers.blogspot.com/2009/01/can-i-use-this-intent.html</a>
      * @param context The application's environment.
      * @param action  The Intent action to check for availability.
      * @return True if an Intent with the specified action can be sent and

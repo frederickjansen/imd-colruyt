@@ -63,7 +63,7 @@ public class OCRActivity extends Activity
     }
 
     /**
-     * Rotate the image upright and convert it to ARGB 8888 for Tesseract
+     * Rotate the image upright, scale it down and convert it to ARGB 8888 for Tesseract.
      */
     private void rotateImage()
     {
@@ -134,7 +134,7 @@ public class OCRActivity extends Activity
     }
 
     /**
-     * Async task which starts Tesseract and decodes the image.
+     * Asynchronous task which starts Tesseract and decodes the image.
      */
     private class OCRTask extends AsyncTask<Bitmap, Void, String>
     {
@@ -168,7 +168,7 @@ public class OCRActivity extends Activity
         /**
          * When the task is done, set the recognized text and destroy Tesseract.
          *
-         * @param result
+         * @param result The recognized text.
          */
         @Override
         protected void onPostExecute(String result)
@@ -184,6 +184,10 @@ public class OCRActivity extends Activity
 
     }
 
+    /**
+     * Asynchronous task which sends the interpreted data over to a server and
+     * returns a price comparison from a server.
+     */
     private class ComparisonTask extends AsyncTask<String, Void, String>
     {
         private static final String TAG = "ComparisonTask";
@@ -195,6 +199,14 @@ public class OCRActivity extends Activity
             this.context = context;
         }
 
+        /**
+         * Send the interpreted text to a server to compare product prices and return
+         * the difference.
+         *
+         * @param ocrData The interpreted OCR data.
+         * @return  Null if the network is unavailable or no data was returned,
+         *          a JSON encoded string otherwise.
+         */
         @Override
         protected String doInBackground(String... ocrData)
         {
@@ -203,9 +215,13 @@ public class OCRActivity extends Activity
                 try
                 {
                     String response;
+
+                    // A map with one element is created because of code re-usability
+                    // The server utilities turns every element into a separate POST value
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("data",recognizedText);
 
+                    // TODO: Don't hardcode this
                     response = ServerUtilities.postAndGet("http://www.janara.be/stuff/colruyt/comparison.php", map);
 
                     return response;
@@ -223,7 +239,8 @@ public class OCRActivity extends Activity
         }
 
         /**
-         * Get the network status
+         * Get the network status.
+         *
          * @return True if the network connection is OK, false otherwise.
          */
         private boolean getNetworkStatus()
@@ -242,6 +259,11 @@ public class OCRActivity extends Activity
 
         }
 
+        /**
+         * Start the next Intent which will create the list.
+         *
+         * @param result The comparison data as a JSON string
+         */
         @Override
         protected void onPostExecute(String result)
         {

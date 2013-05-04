@@ -23,6 +23,7 @@ public class StartupActivity extends Activity
     private File extStorageDirectory = null;
     private AssetManager assetManager = null;
 
+    @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -39,7 +40,6 @@ public class StartupActivity extends Activity
         SharedPreferences settings = this.getSharedPreferences("Colruyt", 0);
         boolean firstrun = settings.getBoolean("firstrun", true);
 
-        // TODO: Remove this for deploy
         if (firstrun) // Checks to see if we've ran the application before
         {
             // Add flag to app settings
@@ -52,7 +52,6 @@ public class StartupActivity extends Activity
 
             Intent home = new Intent(StartupActivity.this, MainActivity.class);
             startActivity(home);
-
         }
         else
         {
@@ -68,6 +67,9 @@ public class StartupActivity extends Activity
      * files. To detect whether we're dealing with a file or a folder, the length of the path in
      * assets is checked. This means that empty folders should be avoided, otherwise they'll be
      * confused with files.
+     *
+     * TODO: Move this into a separate thread to make the UI responsive
+     * TODO: Research if empty folders are really a problem and what the best solution is
      *
      * @param path The subdirectory of the assets folder in which to look.
      */
@@ -111,6 +113,7 @@ public class StartupActivity extends Activity
                             p = path + "/";
                         }
 
+                        // Don't copy the default apk folders
                         if (!path.startsWith("images") && !path.startsWith("sounds") && !path.startsWith("webkit"))
                         {
                             createDirectories(p + assets[i]);
