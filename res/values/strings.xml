@@ -9,4 +9,5 @@
     <string name="comparison.toMain">Overzicht</string>
     <string name="comparison.title">Prijsvergelijking Colruyt</string>
     <string name="comparison.back">&lt;</string>
+    <string name="serverUrl">http://www.janara.be/stuff/colruyt/comparison.php</string>
 </resources>

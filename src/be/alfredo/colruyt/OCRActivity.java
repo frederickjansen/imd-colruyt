@@ -221,8 +221,7 @@ public class OCRActivity extends Activity
                     Map<String, String> map = new HashMap<String, String>();
                     map.put("data",recognizedText);
 
-                    // TODO: Don't hardcode this
-                    response = ServerUtilities.postAndGet("http://www.janara.be/stuff/colruyt/comparison.php", map);
+                    response = ServerUtilities.postAndGet(getString(R.string.serverUrl), map);
 
                     return response;
                 }
