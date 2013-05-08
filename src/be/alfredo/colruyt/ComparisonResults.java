@@ -1,7 +1,7 @@
 package be.alfredo.colruyt;
 
 /**
- *
+ * Data Transfer Object of a product with a name, price and price difference.
  */
 public class ComparisonResults
 {

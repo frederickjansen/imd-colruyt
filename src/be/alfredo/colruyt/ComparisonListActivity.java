@@ -15,20 +15,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- *
+ * Show the list of products along with a price comparison.
  */
 public class ComparisonListActivity extends Activity
 {
     private static final String TAG = "ComparisonListActivity";
     private String ocrText;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.comparison_list);
 
+        // Get the Intent's data
         Intent intent = getIntent();
         ocrText = intent.getStringExtra(OCRActivity.JSON_DATA);
+
 
         ArrayList<ComparisonResults> comparisonResults = parseJson();
 

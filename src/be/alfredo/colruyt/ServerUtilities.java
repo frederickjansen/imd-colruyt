@@ -94,6 +94,7 @@ public class ServerUtilities
      */
     private static String paramsToString(Map<String, String> params)
     {
+        // No POST params to return
         if(params.size() == 0)
         {
             return "";
