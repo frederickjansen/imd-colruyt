@@ -20,7 +20,6 @@ import java.util.ArrayList;
 public class ComparisonListActivity extends Activity
 {
     private static final String TAG = "ComparisonListActivity";
-    private String ocrText;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -30,12 +29,14 @@ public class ComparisonListActivity extends Activity
 
         // Get the Intent's data
         Intent intent = getIntent();
-        ocrText = intent.getStringExtra(OCRActivity.JSON_DATA);
+        String ocrText = intent.getStringExtra(OCRActivity.JSON_DATA);
 
+        // Create list of products
+        ArrayList<ComparisonResults> comparisonResults = parseJson(ocrText);
 
-        ArrayList<ComparisonResults> comparisonResults = parseJson();
-
+        // Get List View
         final ListView lv = (ListView) findViewById(R.id.crListView);
+        // Set the data on the List View by linking it with an adapter
         lv.setAdapter(new ComparisonBaseAdapter(this, comparisonResults));
     }
 
@@ -44,14 +45,20 @@ public class ComparisonListActivity extends Activity
         startActivity(new Intent(ComparisonListActivity.this, MainActivity.class));
     }
 
-    private ArrayList<ComparisonResults> parseJson()
+    /**
+     * Take JSON string and turn it into an ArrayList of products with its price and
+     * price difference, using the ComparisonResults DTO.
+     *
+     * @return List of products with their price and price difference
+     */
+    private ArrayList<ComparisonResults> parseJson(String data)
     {
         ArrayList<ComparisonResults> results = new ArrayList<ComparisonResults>();
         JSONArray ocrJson = null;
 
         try
         {
-            ocrJson = new JSONArray(ocrText);
+            ocrJson = new JSONArray(data);
         }
         catch (JSONException e)
         {
@@ -60,7 +67,7 @@ public class ComparisonListActivity extends Activity
 
         try
         {
-            for (int i = 0; i < ocrJson.length(); i++)
+            for (int i = 0, l = ocrJson.length(); i < l; i++)
             {
                 ComparisonResults cr = new ComparisonResults();
 

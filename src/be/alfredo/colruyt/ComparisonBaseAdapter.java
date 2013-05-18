@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- *
+ * Adapter linking the data of the products to the ListView in ComparisonListActivity.
  */
 public class ComparisonBaseAdapter extends BaseAdapter
 {
@@ -70,6 +70,9 @@ public class ComparisonBaseAdapter extends BaseAdapter
         return convertView;
     }
 
+    /**
+     * Tag which stores the data for the ListView's row.
+     */
     static class ViewHolder
     {
         public TextView product;
